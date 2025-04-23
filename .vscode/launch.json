@@ -22,8 +22,11 @@
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/invoices\"}",
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/v2\",\"url\":\"https://northwind.dest\",\"destination\":\"Northwind\"}]",
+        "FIORI_TOOLS_UI5_VERSION": "1.135.0",
+        "FIORI_TOOLS_UI5_URI": "https://ui5.sap.com"
       }
     }
   ]
