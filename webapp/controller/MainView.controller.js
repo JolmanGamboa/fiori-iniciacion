@@ -1,6 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], 
+/**
+ * 
+ * @param {typeof sap.ui.core.mvc.Controller} Controller 
+ * @param {typeof sap.ui.model.Filter} Filter
+ * @param {typeof sap.ui.model.FilterOperator} FilterOperator
+ */
+(Controller,Filter,FilterOperator) => {
     "use strict";
 
     return Controller.extend("logaligroup.invoices.controller.MainView", {
@@ -12,7 +21,20 @@ sap.ui.define([
         },
 
         onFilter: function (oEvent){
+            const oData = this.getView().getModel("selectionScreen").getData();
+            let filters = [];
 
+            if(oData.ShipName != ""){
+                filters.push(new Filter("ShipName", FilterOperator.Contains, oData.ShipName));
+            }
+
+            if(oData.Countrykey != ""){
+                filters.push(new Filter("Country", FilterOperator.EQ, oData.Countrykey));
+            }
+
+            const oList = this.getView().byId("invoicesList");
+            const oBinding = oList.getBinding("items");
+            oBinding.filter(filters);
         },
 
         onClearFilter: function (){
@@ -20,6 +42,9 @@ sap.ui.define([
             oModelSelScreen.setProperty("/ShipName", "");
             oModelSelScreen.setProperty("/Countrykey", "");
 
+            const oList = this.getView().byId("invoicesList");
+            const oBinding = oList.getBinding("items");
+            oBinding.filter([]);
         }
     });
 });
